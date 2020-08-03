@@ -2,18 +2,9 @@ import React, { useEffect, useState, useCallback } from "react";
 import * as firebase from "firebase/app";
 import "firebase/database";
 import {
-  message,
   Layout,
-  Statistic,
-  Card,
-  Row,
-  Col,
-  Timeline,
-  DatePicker,
   notification,
 } from "antd";
-import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
-import DataTable from "./components/DataTable";
 import "antd/dist/antd.css";
 import "./app.scss";
 

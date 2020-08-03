@@ -4,7 +4,6 @@ import { DataInterface } from "../App";
 import VerticalDivider from "./VerticalDivider";
 import DataTable from "./DataTable";
 import moment from "moment";
-import { auth } from "firebase";
 
 const { RangePicker } = DatePicker;
 interface DetailLayoutProps {
