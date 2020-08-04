@@ -138,7 +138,7 @@ function App() {
     } else {
       setPrevRoadDataNumber(roadData.length);
     }
-  }, [roadData, prevRoadDataNumber, init, markers]);
+  }, [roadData, prevRoadDataNumber, init]);
 
   return (
     <div>
