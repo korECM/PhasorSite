@@ -50,74 +50,64 @@ function StatisticLayout({ todayRoadData, roadData }: StatisticLayoutProps) {
   }, [roadData, todayRoadData, prevData, prevMonthData, currentMonthData]);
 
   return (
-    <div>
+    <div className="topStatistic itemContainer">
       <Row gutter={16}>
         <Col span={12}>
-          <Statistic
-            title="오늘 보고된 포트홀"
-            value={`${todayRoadData.length}개`}
-          />
+          <div className="ant-statistic-title">오늘 보고된 포트홀</div>
+          <div className="statistic-main">{todayRoadData.length}개</div>
         </Col>
         <Col span={12}>
-          <Statistic
-            title="지금까지 보고된 포트홀"
-            value={`${roadData.length}개`}
-          />
+          <div className="ant-statistic-title">지금까지 보고된 포트홀</div>
+          <div className="statistic-main">{roadData.length}개</div>
         </Col>
       </Row>
       <VerticalDivider height={80} />
       <Row gutter={16}>
         <Col span={12}>
-          <Card>
-            <Statistic
-              title="전날 대비 증가량"
-              value={prevValue}
-              valueStyle={{
-                color:
-                  prevData === 0 && todayRoadData.length === 0
-                    ? "inherit"
-                    : todayRoadData.length > prevData
-                    ? "#cf1322"
-                    : "#3f8600",
-              }}
-              prefix={
-                prevData === 0 &&
-                todayRoadData.length === 0 ? undefined : todayRoadData.length >
-                  prevData ? (
-                  <ArrowUpOutlined />
-                ) : (
-                  <ArrowDownOutlined />
-                )
-              }
-              suffix="개"
-            />
-          </Card>
+          <div className="ant-statistic-title">전날 대비 증가량</div>
+          <span
+            className="statistic-main"
+            style={{
+              color:
+                prevData === 0 && todayRoadData.length === 0
+                  ? "inherit"
+                  : todayRoadData.length > prevData
+                  ? "#cf1322"
+                  : "#3f8600",
+            }}
+          >
+            {prevData === 0 &&
+            todayRoadData.length === 0 ? undefined : todayRoadData.length >
+              prevData ? (
+              <ArrowUpOutlined />
+            ) : (
+              <ArrowDownOutlined />
+            )}
+            {prevValue}개
+          </span>
         </Col>
         <Col span={12}>
-          <Card>
-            <Statistic
-              title="전월 대비 증가량"
-              value={prevMonthValue}
-              valueStyle={{
-                color:
-                  prevMonthData === 0 && currentMonthData === 0
-                    ? "inherit"
-                    : currentMonthData > prevMonthData
-                    ? "#cf1322"
-                    : "#3f8600",
-              }}
-              prefix={
-                prevMonthData === 0 &&
-                currentMonthData === 0 ? undefined : currentMonthData >
-                  prevMonthData ? (
-                  <ArrowUpOutlined />
-                ) : (
-                  <ArrowDownOutlined />
-                )
-              }
-              suffix="개"
-            />
-          </Card>
+          <div className="ant-statistic-title">전월 대비 증가량</div>
+          <span
+            className="statistic-main"
+            style={{
+              color:
+                prevMonthData === 0 && currentMonthData === 0
+                  ? "inherit"
+                  : currentMonthData > prevMonthData
+                  ? "#cf1322"
+                  : "#3f8600",
+            }}
+          >
+            {prevMonthData === 0 &&
+            currentMonthData === 0 ? undefined : currentMonthData >
+              prevMonthData ? (
+              <ArrowUpOutlined />
+            ) : (
+              <ArrowDownOutlined />
+            )}
+            {prevMonthValue}개
+          </span>
         </Col>
       </Row>
     </div>

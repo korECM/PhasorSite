@@ -37,37 +37,15 @@ function DetailLayout({ roadData }: DetailLayoutProps) {
 
   return (
     <div className="itemContainer">
-      <Row gutter={16}>
-        <Col span={12}>
-          <Space direction="vertical" size={12}>
-            <RangePicker
-              ranges={{
-                Today: [moment(), moment()],
-                "This Month": [
-                  moment().startOf("month"),
-                  moment().endOf("month"),
-                ],
-              }}
-              onChange={onChange}
-            />
-          </Space>
-          <DataTable rawData={filterdData} />
-        </Col>
-        <Col span={12}>
-          <div className="ant-statistic-title">타임라인</div>
-          <VerticalDivider height={40} />
-          <Timeline>
-            {roadData.slice(0, 7).map((e) => (
-              <Timeline.Item key={e.time.toString()}>
-                <p>위도 : {e.latitude}</p>
-                <p>경도 : {e.longitude}</p>
-                <p>심각도 : {e.magnitude}</p>
-                <p>시간 : {e.dateString}</p>
-              </Timeline.Item>
-            ))}
-          </Timeline>
-        </Col>
-      </Row>
+      <RangePicker
+        ranges={{
+          Today: [moment(), moment()],
+          "This Month": [moment().startOf("month"), moment().endOf("month")],
+        }}
+        onChange={onChange}
+      />
+      <VerticalDivider height={30} />
+      <DataTable rawData={filterdData} />
     </div>
   );
 }
