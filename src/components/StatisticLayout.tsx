@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Statistic, Card } from "antd";
+import { Row, Col } from "antd";
 import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
 import { DataInterface } from "../App";
 import VerticalDivider from "./VerticalDivider";

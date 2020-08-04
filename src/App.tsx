@@ -138,7 +138,7 @@ function App() {
     } else {
       setPrevRoadDataNumber(roadData.length);
     }
-  }, [roadData, prevRoadDataNumber, init]);
+  }, [roadData, prevRoadDataNumber, init, markers]);
 
   return (
     <div>
@@ -179,6 +179,7 @@ function App() {
                   ? decodeURIComponent(selected.imageLink)
                   : "https://crestaproject.com/demo/lontano-pro/wp-content/themes/lontano-pro/images/no-image-slide.png"
               }
+              alt="포트홀 사진"
             />
             <div className="imageDetailContent">
               <div>위도 : {selected ? selected.latitude : ""}</div>
