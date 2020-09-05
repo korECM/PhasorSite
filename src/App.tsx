@@ -129,7 +129,11 @@ function App() {
       setPrevRoadDataNumber(roadData.length);
       setInit(true);
     } else if (prevRoadDataNumber < roadData.length) {
-      let newData = roadData.slice(prevRoadDataNumber);
+      let newData = roadData.slice(0, roadData.length - prevRoadDataNumber);
+      console.log("road", roadData);
+      console.log("new", newData);
+      console.log(roadData.length);
+      console.log(prevRoadDataNumber);
       newData.forEach((e: DataInterface) => {
         notification.open({
           message: `${e.dateString}`,
@@ -169,7 +173,7 @@ function App() {
           <VerticalDivider height={40} />
           <Timeline>
             {roadData.slice(0, 7).map((e) => (
-              <Timeline.Item key={e.time.toString()}>
+              <Timeline.Item key={e.time.toISOString()}>
                 <p>위도 : {e.latitude}</p>
                 <p>경도 : {e.longitude}</p>
                 <p>심각도 : {e.magnitude}</p>
