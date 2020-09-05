@@ -203,7 +203,7 @@ function App() {
         <img
           src={decodeURIComponent(imgLink)}
           alt="포트홀 사진"
-          style={{ margin: "0 auto", width: "100%" }}
+          style={{ margin: "0 auto", width: "100%", maxHeight: "80vh" }}
         />
       </Dialog>
     </div>
