@@ -3,6 +3,7 @@ import { Row, Col } from "antd";
 import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
 import { DataInterface } from "../App";
 import VerticalDivider from "./VerticalDivider";
+import { Line } from "react-chartjs-2";
 
 const isSameDay = (a: Date, b: Date) => {
   return (
@@ -49,8 +50,42 @@ function StatisticLayout({ todayRoadData, roadData }: StatisticLayoutProps) {
     setPrevMonthValue(currentMonthData - prevMonthData);
   }, [roadData, todayRoadData, prevData, prevMonthData, currentMonthData]);
 
+  let graphData = [6, 5, 4, 3, 2, 1, 0]
+    .map((dayOffset) => {
+      let temp = new Date(new Date().setHours(0, 0, 0, 0));
+      temp.setDate(temp.getDate() - dayOffset);
+      return temp;
+    })
+    .map((day) => ({
+      date: day,
+      count: roadData.filter((data) => isSameDay(day, data.time)).length,
+    }));
+
+  const data = {
+    labels: graphData.map(
+      (e) =>
+        `${e.date.getFullYear()}년 ${
+          e.date.getMonth() + 1
+        }월 ${e.date.getDate()}일`
+    ),
+    datasets: [
+      {
+        label: "",
+        data: graphData.map((e) => e.count),
+        fill: false,
+        backgroundColor: "rgba(75,192,192,0.2)",
+        borderColor: "rgba(75,192,192,1)",
+        lineTension: 0.3,
+      },
+    ],
+  };
+
   return (
     <div className="topStatistic itemContainer">
+      <Row gutter={16}>
+        <Line data={data} />
+      </Row>
+      <VerticalDivider height={80} />
       <Row gutter={16}>
         <Col span={12}>
           <div className="ant-statistic-title">오늘 보고된 포트홀</div>

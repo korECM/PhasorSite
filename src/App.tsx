@@ -9,6 +9,7 @@ import FirebaseConfig from "./firebase.config";
 import VerticalDivider from "./components/VerticalDivider";
 import StatisticLayout from "./components/StatisticLayout";
 import DetailLayout from "./components/DetailLayout";
+import Dialog from "./Dialog";
 
 const { Footer } = Layout;
 export interface DataInterface {
@@ -43,6 +44,10 @@ function App() {
   const [prevRoadDataNumber, setPrevRoadDataNumber] = useState<number>(0);
   const [todayRoadData, setTodayRoadData] = useState<DataInterface[]>([]);
 
+  const [modal, setModal] = useState(false);
+
+  const [imgLink, setImgLink] = useState("");
+
   const updateData = useCallback((snapshot: firebase.database.DataSnapshot) => {
     let data = Object.values(snapshot.val()) as any[];
     data = data
@@ -54,7 +59,7 @@ function App() {
         ...e,
         dateString: `${e.time.getFullYear()}년 ${
           e.time.getMonth() + 1
-        }월 ${e.time.getDay()}일 ${e.time.getHours()}:${e.time.getMinutes()}:${e.time.getSeconds()}`,
+        }월 ${e.time.getDate()}일 ${e.time.getHours()}:${e.time.getMinutes()}:${e.time.getSeconds()}`,
       }))
       .reverse();
     console.log(data);
@@ -127,10 +132,9 @@ function App() {
       let newData = roadData.slice(prevRoadDataNumber);
       newData.forEach((e: DataInterface) => {
         notification.open({
-          message: `${e.dateString} 심각도 : ${e.magnitude}`,
+          message: `${e.dateString}`,
           description: `위도 : ${e.latitude}
 경도 : ${e.longitude}
-심각도 : ${e.magnitude}
 - ${e.dateString}`,
         });
       });
@@ -154,7 +158,11 @@ function App() {
       <div className="container">
         <StatisticLayout roadData={roadData} todayRoadData={todayRoadData} />
         <VerticalDivider height={50} />
-        <DetailLayout roadData={roadData} />
+        <DetailLayout
+          roadData={roadData}
+          showModal={() => setModal(true)}
+          setImgLink={setImgLink}
+        />
         <VerticalDivider height={50} />
         <div className="itemContainer">
           <div className="ant-statistic-title">타임라인</div>
@@ -191,6 +199,13 @@ function App() {
         </div>
       </div>
       <Footer style={{ textAlign: "center" }}>Phasor</Footer>
+      <Dialog visible={modal} onCancel={() => setModal(false)}>
+        <img
+          src={decodeURIComponent(imgLink)}
+          alt="포트홀 사진"
+          style={{ margin: "0 auto", width: "100%" }}
+        />
+      </Dialog>
     </div>
   );
 }

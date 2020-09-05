@@ -8,9 +8,11 @@ import moment from "moment";
 const { RangePicker } = DatePicker;
 interface DetailLayoutProps {
   roadData: DataInterface[];
+  showModal: () => void;
+  setImgLink: (link: string) => void;
 }
 
-function DetailLayout({ roadData }: DetailLayoutProps) {
+function DetailLayout({ roadData, showModal, setImgLink }: DetailLayoutProps) {
   const [from, setFrom] = useState(new Date("1999-01-01"));
   const [to, setTo] = useState(new Date("2999-12-31"));
 
@@ -45,7 +47,11 @@ function DetailLayout({ roadData }: DetailLayoutProps) {
         onChange={onChange}
       />
       <VerticalDivider height={30} />
-      <DataTable rawData={filterdData} />
+      <DataTable
+        rawData={filterdData}
+        showModal={showModal}
+        setImgLink={setImgLink}
+      />
     </div>
   );
 }
